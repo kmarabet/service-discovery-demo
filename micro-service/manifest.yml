@@ -7,7 +7,6 @@ applications:
   instances: 1
 #  host: accounts-service-${random-word}
 #  host: acounts-service
-#  domain: cf.sd3.hospira.corp
   path: target/micro-service-1.0-SNAPSHOT-exec.jar
   #no-route: true
   env:

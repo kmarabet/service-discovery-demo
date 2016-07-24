@@ -5,7 +5,6 @@ applications:
 - name: web-service
 #  host: web-service-${random-word}
   path: target/web-server-1.0-SNAPSHOT-exec.jar
-  domain: cf.sd3.hospira.corp
   #no-route: true
   env:
 #   JAVA_OPTS: -Djava.security.egd=file:///dev/urandom

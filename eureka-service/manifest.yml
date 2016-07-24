@@ -6,7 +6,6 @@ applications:
 #  host: eureka-service-${random-word}
   memory: 512M
   instances: 1
-  domain: cf.sd3.hospira.corp
   path: target/eureka-service-1.0-SNAPSHOT-exec.jar
   #no-route: true
   env:
