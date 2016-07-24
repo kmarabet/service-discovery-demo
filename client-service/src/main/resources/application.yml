@@ -1,0 +1,41 @@
+# HTTP Server
+server:
+#  port: 3333   # HTTP (Tomcat) port
+  port: ${vcap.application.port:3333}
+
+micro_service_url: 'MICRO-SERVICE'
+
+# Spring properties
+spring:
+  freemarker:
+    enabled: false     # Ignore Eureka dashboard FreeMarker templates
+  thymeleaf:
+    cache: false       # Allow Thymeleaf templates to be reloaded at runtime
+    prefix: classpath:/web-server/templates/    # Trailing / mandatory
+                       # Template location for this application only
+
+# Map the error path to error template (for Thymeleaf)
+error:
+  path=/error
+
+# Discovery Server Access
+eureka:
+  client:
+    enabled: @eureka.enable@
+    serviceUrl:
+#      defaultZone: http://localhost:1111/eureka/
+      defaultZone: ${vcap.services.eureka-service.credentials.uri:http://localhost:1111/eureka/}
+
+#Consul default address
+#spring.cloud.consul.host: localhost
+#spring.cloud.consul.port: 8500
+
+---
+spring:
+  profiles: cloud
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+    hostname: ${vcap.application.uris[0]}
+    nonSecurePort: 80

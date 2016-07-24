@@ -1,0 +1,18 @@
+---
+#memory: 1G
+#instances: 1
+applications:
+- name: simple-service
+  memory: 512M
+  instances: 1
+#  host: accounts-service-${random-word}
+#  host: acounts-service
+#  domain: cf.sd3.hospira.corp
+  path: target/micro-service-1.0-SNAPSHOT-exec.jar
+  #no-route: true
+  env:
+#    SPRING_PROFILES_DEFAULT: cloud  #BY DEFAULT
+    DEBUG: "true"
+    debug: "true"
+  services:
+   - eureka-service

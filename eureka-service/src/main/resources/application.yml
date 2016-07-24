@@ -1,0 +1,29 @@
+server:
+#  port: ${PORT:8761} #default well-known 8761 port, if Cloud Foundry’s VCAP_APPLICATION_PORT environment variable isn’t available.
+  port: ${vcap.application.port:1111}
+
+# Configure this Discovery Server
+eureka:
+  instance:
+    hostname: localhost
+#    securePortEnabled: true
+#    statusPageUrl: https://${eureka.hostname}/info
+#    healthCheckUrl: https://${eureka.hostname}/health
+#    homePageUrl: https://${eureka.hostname}/
+#(Note that ${eureka.hostname} is a native placeholder only available in later versions of Eureka. You could achieve the same thing with Spring placeholders as well, e.g. using ${eureka.instance.hostName}.)
+#    nonSecurePort: 80
+
+#    metadataMap:
+#          instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+  client:  # Not a client, don't register with yourself
+    registerWithEureka: false
+    fetchRegistry: false
+#    serviceUrl:
+#       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    waitTimeInMsWhenSyncEmpty: 0 #Start servre quiqly NOT ON PRODUCTION
+
+# Discovery Server Dashboard uses FreeMarker.  Don't want Thymeleaf templates
+spring:
+  thymeleaf:
+    enabled: false     # Disable Thymeleaf 

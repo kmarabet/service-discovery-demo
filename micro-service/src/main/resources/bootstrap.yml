@@ -1,0 +1,24 @@
+# Bootstrap properties are added with high precedence,
+#so they cannot be overridden by local configuration, by default.
+spring:
+  application:
+    name: accounts-service  # Service registers under this name
+#  cloud:
+#      config:
+#        uri: ${SPRING_CONFIG_URI:http://localhost:8888}
+
+# Discovery Server Access
+#Consul default address: localhost:8500
+  cloud:
+    consul:
+      enabled: @consul.enable@
+#      host: 172.30.0.125
+#      port: 8500
+
+---
+spring:
+  profiles: cloud
+  cloud:
+      consul:
+        host: 192.168.115.130
+#        port: 8500

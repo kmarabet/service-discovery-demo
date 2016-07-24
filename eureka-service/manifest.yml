@@ -1,0 +1,17 @@
+---
+#memory: 1G
+#instances: 1
+applications:
+- name: eureka-service
+#  host: eureka-service-${random-word}
+  memory: 512M
+  instances: 1
+  domain: cf.sd3.hospira.corp
+  path: target/eureka-service-1.0-SNAPSHOT-exec.jar
+  #no-route: true
+  env:
+    SPRING_PROFILES_DEFAULT: cloud
+    DEBUG: "true"
+    debug: "true"
+   #JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
+   #JAVA_OPTS: -agentlib:jdwp=transport=dt_socket,address=192.168.115.106:5005

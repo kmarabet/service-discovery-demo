@@ -1,0 +1,19 @@
+cf cups eureka-service -p '{\"uri\": \"http://eureka-service.<cf-url>\"}'
+
+System-Provided:
+{
+ "VCAP_SERVICES": {
+  "user-provided": [
+   {
+    "credentials": {
+     "uri": "http://eureka-service.<cf-url>"
+    },
+    "label": "user-provided",
+    "name": "eureka-service",
+    "syslog_drain_url": "",
+    "tags": [],
+    "volume_mounts": []
+   }
+  ]
+ }
+}

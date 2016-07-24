@@ -1,0 +1,14 @@
+# HTTP Server
+server:
+#  port: 2222   # HTTP (Tomcat) port
+  port: 0
+
+# Spring properties
+spring:
+  application:
+     name: accounts-service  # Service registers under this name
+  thymeleaf:
+    cache: false             # Allow Thymeleaf templates to be reloaded at runtime
+    prefix: classpath:/accounts-server/templates/    # Trailing / mandatory
+                             # Template location for this application only
+
