@@ -12,8 +12,9 @@ spring:
   cloud:
     consul:
       enabled: @consul.enable@
+      host: localhost
 #      host: 172.30.0.125
-#      port: 8500
+      port: 8500
 
 ---
 spring:

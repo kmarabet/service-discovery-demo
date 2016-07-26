@@ -9,22 +9,23 @@
 	<h1>Microservices Demo - Web Server</h1>
 	<h3>Overview</h3>
 	<ul>
-		<li>Demo defines a simple web-application for accessing accounts
-			data.</li>
-		<li>All the account information is fetched via a RESTful
-			interface to a Accounts microservice.</li>
+		<li>Demo defines a simple web-application for accessing a micro service.</li>
 	</ul>
 
 	<h3>The Demo</h3>
 
 	<ul class="openlist">
-		<li>Eureka Dashboard: <a th:href="${eurekaUrl}"><span th:text="${eurekaUrl}"></span></a></li>
 
-		<li>Check applications registered: <a
-			th:href="${eurekaUrl}+apps"><span th:text="${eurekaUrl}"/>apps/</a></li>
+		<li th:if="${eurekaEnabled}" >Eureka Dashboard:
+			<a th:href="${eurekaUrl}"><span th:text="${eurekaUrl}"></span></a></li>
+
+		<li th:if="${eurekaEnabled}">Check applications registered:
+			<a th:href="${eurekaUrlApps}"><span th:text="${eurekaUrlApps}"/></a></li>
+
+		<li th:if="${consulEnabled}" >Consul Dashboard: <a th:href="${consulUrl}">
+			<span th:text="${consulUrl}"></span></a></li>
 
 		<li>Test service discovery: <a th:href="@{/test-sd}">/test-sd</a></li>
-
 	</ul>
 
 	<h3>Spring Boot URLs</h3>

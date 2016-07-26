@@ -1,4 +1,4 @@
-package com.altoros.accounts;
+package com.altoros.micro;
 
 import com.altoros.MicroServiceApp;
 import org.junit.Before;
@@ -33,7 +33,7 @@ public class MicroServiceTest {
     }
 
     @Test
-    public void testAccountServiceAvailability() throws Exception {
+    public void testMicroServiceAvailability() throws Exception {
 
         clientServiceMockMvc.perform(get("/")).
                 andExpect(status().isOk()).

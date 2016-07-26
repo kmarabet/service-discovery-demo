@@ -1,4 +1,4 @@
-package com.altoros.accounts;
+package com.altoros.micro;
 
 import com.altoros.WebServerApp;
 import org.junit.Before;

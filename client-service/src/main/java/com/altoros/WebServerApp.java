@@ -26,8 +26,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class WebServerApp {
 
 	/**
-	 * URL uses the logical name of micro-service - upper or lower case,
-	 * doesn't matter.
+	 * URL uses the logical name of micro-service - upper or lower case, doesn't matter.
 	 */
 	//public static final String MICRO_SERVICE_URL = "http://MICRO-SERVICE";
 	//public static final String MICRO_SERVICE_URL = "MICRO-SERVICE";
@@ -43,7 +42,7 @@ public class WebServerApp {
 	public static void main(String[] args) {
 		// Tell server to look for web-server.properties or web-server.yml
 		//System.setProperty("spring.config.name", "web-server");
-		//MICRO_SERVICE_URL = System.getProperty("accounts.service.url");
+		//MICRO_SERVICE_URL = System.getProperty("micro.service.url");
 		//System.err.println("MICRO_SERVICE_URL: "+MICRO_SERVICE_URL);
 		SpringApplication.run(WebServerApp.class, args);
 	}
@@ -55,7 +54,7 @@ public class WebServerApp {
 	}
 
 	/**
-	 * The AccountService encapsulates the interaction with the micro-service.
+	 * The WebMicroService encapsulates the interaction with the micro-service.
 	 * 
 	 * @return A new service instance.
 	 */
@@ -71,7 +70,7 @@ public class WebServerApp {
 	 * @return
 	 */
 	@Bean
-	public WebMicroController accountsController() {
+	public WebMicroController microController() {
 		return new WebMicroController(microService());
 	}
 
@@ -79,6 +78,5 @@ public class WebServerApp {
 	public HomeController homeController() {
 		return new HomeController();
 	}
-
 
 }

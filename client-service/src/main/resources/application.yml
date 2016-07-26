@@ -24,7 +24,7 @@ eureka:
     enabled: @eureka.enable@
     serviceUrl:
 #      defaultZone: http://localhost:1111/eureka/
-      defaultZone: ${vcap.services.eureka-service.credentials.uri:http://localhost:1111/eureka/}
+      defaultZone: ${vcap.services.eureka-service.credentials.uri:http://localhost:1111}/eureka/
 
 #Consul default address
 #spring.cloud.consul.host: localhost

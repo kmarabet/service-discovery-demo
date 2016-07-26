@@ -2,7 +2,7 @@
 #so they cannot be overridden by local configuration, by default.
 spring:
   application:
-    name: accounts-service  # Service registers under this name
+    name: micro-service  # Service registers under this name
 #  cloud:
 #      config:
 #        uri: ${SPRING_CONFIG_URI:http://localhost:8888}
@@ -12,8 +12,9 @@ spring:
   cloud:
     consul:
       enabled: @consul.enable@
+      host: localhost
 #      host: 172.30.0.125
-#      port: 8500
+      port: 8500
 
 ---
 spring:

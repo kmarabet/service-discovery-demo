@@ -15,21 +15,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class MicroServiceApp implements CommandLineRunner, EnvironmentAware {
 
 	//protected Logger logger = Logger.getLogger(MicroServiceApp.class.getName());
+	@Value("${spring.application.name}")
+	String applicationName;
 
-	private String applicationName;
-	private String applicationUris;
+	private String cfApplicationName;
+	private String cfApplicationUris;
 	@Override
 	public void setEnvironment(Environment environment) {
-		this.applicationName = environment.getProperty("vcap.application.application_name");
-		this.applicationUris = environment.getProperty("vcap.application.application_uris");
+		this.cfApplicationName = environment.getProperty("vcap.application.application_name");
+		this.cfApplicationUris = environment.getProperty("vcap.application.application_uris");
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 		//THE System.err is used to highlight the output (in red in CF)
 		System.err.println("**************************************************************************");
-		System.err.println("*** vcap.application.application_name: "+ applicationName);
-		System.err.println("*** vcap.application.application_uris: "+ applicationUris);
+		System.err.println("*** spring.application.name: "+ applicationName);
+		if (cfApplicationName != null){
+			System.err.println("*** vcap.application.application_name: "+ cfApplicationName);
+			System.err.println("*** vcap.application.application_uris: "+ cfApplicationUris);
+		}
 		System.err.println("**************************************************************************");
 	}
 
@@ -40,9 +45,9 @@ public class MicroServiceApp implements CommandLineRunner, EnvironmentAware {
 	 *            Program arguments - ignored.
 	 */
 	public static void main(String[] args) {
-		// Tell server to look for accounts-server.properties or
-		// accounts-server.yml
-		//System.setProperty("spring.config.name", "accounts-server");
+		// Tell server to look for micro-server.properties or
+		// micro-server.yml
+		//System.setProperty("spring.config.name", "micro-server");
 
 		SpringApplication.run(MicroServiceApp.class, args);
 		/*new SpringApplicationBuilder(MicroServiceApp.class)

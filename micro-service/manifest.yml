@@ -2,11 +2,10 @@
 #memory: 1G
 #instances: 1
 applications:
-- name: simple-service
+- name: micro-service
   memory: 512M
   instances: 1
-#  host: accounts-service-${random-word}
-#  host: acounts-service
+#  host: micro-service-${random-word}
   path: target/micro-service-1.0-SNAPSHOT-exec.jar
   #no-route: true
   env:

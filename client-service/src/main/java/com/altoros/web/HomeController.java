@@ -15,14 +15,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @EnableDiscoveryClient
 public class HomeController {
 
+	@Value("${eureka.client.enabled}")
+	Boolean eurekaEnabled;
 	@Value("${eureka.client.serviceUrl.defaultZone}")
 	String eurekaUrl;
+
+	@Value("${spring.cloud.consul.enabled}")
+	Boolean consulEnabled;
+	@Value("${spring.cloud.consul.host}")
+	String consulHost;
+	@Value("${spring.cloud.consul.port}")
+	String consulPort;
 
 	@RequestMapping("/")
 	public String home(Model model) {
 
+		model.addAttribute("eurekaEnabled", eurekaEnabled);
 		model.addAttribute("eurekaUrl", eurekaUrl);
+		model.addAttribute("eurekaUrlApps", eurekaUrl+"/eureka/apps");
+
+		model.addAttribute("consulEnabled", consulEnabled);
+		model.addAttribute("consulUrl", "http://"+consulHost+":"+consulPort);
 
 		return "index";
 	}
+
 }
