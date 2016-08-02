@@ -5,7 +5,6 @@ applications:
 - name: web-service-eureka
 #  host: web-service-${random-word}
   path: target/web-server-1.0-SNAPSHOT-eureka-exec.jar
-  domain: cf.sd3.hospira.corp
   #no-route: true
   env:
 #   ACCOUNTS_SERVICE_URL: ACCOUNTS-SERVICE
