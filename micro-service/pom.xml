@@ -17,7 +17,7 @@
 	</parent>
 
 	<!--<properties>
-		<start-class>MicroServiceApp</start-class>
+		<start-class>ServerApp</start-class>
 	</properties>-->
 
 	<!--<dependencyManagement>
@@ -35,6 +35,14 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>com.altoros</groupId>
+			<artifactId>microservice-cloud-commons</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<!--<scope>system</scope>
+            <systemPath>${basedir}/../microservice-cloud-commons/target/microservice-cloud-commons-1.0-SNAPSHOT.jar</systemPath>-->
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
@@ -42,7 +50,7 @@
 		<!-- Eureka service registration -->
 		<!--<dependency>-->
 			<!--<groupId>org.springframework.cloud</groupId>-->
-			<!--<artifactId>spring-cloud-starter-eureka-server</artifactId>-->
+			<!--<artifactId>spring-cloud-starter-eureka</artifactId>-->
 		<!--</dependency>-->
 		<!--Consul service registration-->
 		<!--<dependency>
@@ -98,7 +106,7 @@
 							<goal>repackage</goal>
 						</goals>
 						<configuration>
-							<classifier>exec</classifier>
+							<classifier>${profile-id}-exec</classifier>
 						</configuration>
 					</execution>
 				</executions>

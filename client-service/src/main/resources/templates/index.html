@@ -1,0 +1,65 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+
+	<h1>Microservices Demo - Web Server</h1>
+	<!--todo include -->
+	<!--<div th:replace="app-info :: 'copy'"> </div>-->
+	<ul>
+		<li>spring.application.name: <text th:text="${appInfo.appName}"/>, running on
+			<text th:if="!${appInfo.cloudProfileSet}">port: <text th:text="${appInfo.port}"/></text>
+			<text th:if="${appInfo.cloudProfileSet}">cloud under the name: <text th:text="${appInfo.cloudAppName}"/></text>
+		</li>
+		<li th:if="${appInfo.eurekaEnabled}">Registered in Eureka under instanceId: <span th:text="${appInfo.instanceID}"></span></li>
+		<li th:if="${appInfo.consulEnabled}">Registered in Consul under instanceId: <span th:text="${appInfo.instanceID}"></span></li>
+	</ul>
+
+	<h2>Overview</h2>
+	<ul>
+		<li>Demo defines a simple web-application for accessing accounts data.</li>
+		<li>All the account information is fetched via a RESTful interface to a Accounts microservice.</li>
+	</ul>
+
+	<h2>The Demo</h2>
+
+	<ul class="openlist">
+		<li th:if="${appInfo.eurekaEnabled}" >Eureka Dashboard:
+			<a th:href="${appInfo.eurekaUrl}"><span th:text="${appInfo.eurekaUrl}"></span></a></li>
+		<!--<li th:if="${appInfo.eurekaEnabled}">Check applications registered:
+			<a th:href="${appInfo.eurekaUrl}/eureka/apps"><span th:text="${appInfo.eurekaUrl}">/eureka/apps</span></a></li>-->
+
+		<li th:if="${appInfo.consulEnabled}" >Consul Dashboard:
+			<a th:href="${appInfo.consulUrl}"><span th:text="${appInfo.consulUrl}"></span></a></li>
+
+		<li>Test service discovery: <a th:href="@{/test-sd}">/test-sd</a></li>
+
+		<li>Fetch account #123456789: <a th:href="@{/accounts/123456789}">/accounts/123456789</a></li>
+
+		<li>Fetch by name: <a th:href="@{/accounts/owner/Keri}">/accounts/owner/Keri</a></li>
+
+		<li>Account <a th:href="@{/accounts/search}">Search</a></li>
+	</ul>
+
+	<h2>Spring Boot URLs</h2>
+	<p>For those interested, Spring Boot provides RESTful URLs for
+		interrogating your application (they return JSON format data):</p>
+
+	<ul>
+		<li><a th:href="@{/beans}">The beans</a></li>
+		<li><a th:href="@{/env}">The environment</a></li>
+		<li><a th:href="@{/dump}">Thread dump</a></li>
+		<li><a th:href="@{/health}">Application health</a></li>
+		<li><a th:href="@{/info}">Application information</a></li>
+		<li><a th:href="@{/configprops}">Application config properties</a></li>
+		<li><a th:href="@{/metrics}">Application metrics</a></li>
+		<li><a th:href="@{/trace}">Request call trace</a></li>
+	</ul>
+
+	<div th:replace="footer :: copy"></div>
+
+</body>
+</html>

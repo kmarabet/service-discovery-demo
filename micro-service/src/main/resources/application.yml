@@ -7,32 +7,7 @@ server:
 spring:
   freemarker:
     enabled: false           # Ignore Eureka dashboard FreeMarker templates
-# Discovery Server Access
-eureka:
-  client:
-    enabled: @eureka.enable@
-#    region: default
-#    registryFetchIntervalSeconds: 5
-    serviceUrl:
-#      defaultZone: http://localhost:1111/eureka/
-      defaultZone: ${vcap.services.eureka-service.credentials.uri:http://localhost:1111/eureka/}
-#    availabilityZones:
-#      default: ${APPLICATION_DOMAIN:${DOMAIN:defaultZone}}
 
-ribbon:
-  ServerListRefreshInterval: 1000
-
-logging:
-  level:
-    org.springframework.cloud.consul: DEBUG
-
----
-spring:
-  profiles: cloud
-
-eureka:
-  instance:
-#    leaseRenewalIntervalInSeconds: 10
-    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
-    hostname: ${vcap.application.uris[0]}
-    nonSecurePort: 80
+#---
+#spring:
+#  profiles: cloud

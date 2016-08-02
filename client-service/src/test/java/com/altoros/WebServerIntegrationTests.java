@@ -1,4 +1,4 @@
-package com.altoros.micro;
+package com.altoros;
 
 import com.altoros.WebServerApp;
 import org.junit.Before;
@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = WebServerApp.class)
-@WebIntegrationTest({"server.port=0", "spring.cloud.discovery.enabled=false"})
+@WebIntegrationTest({"server.port=0", "spring.cloud.discovery.enabled=false", "spring.cloud.consul.enabled=false"})
 public class WebServerIntegrationTests {
 
 	@Autowired
@@ -35,24 +35,32 @@ public class WebServerIntegrationTests {
 
 	@Before
 	public void setUp() {
+
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	@Test
-	public void testSpringBootAppRestInterAvailability() throws Exception {
-		MockHttpServletRequestBuilder getReq = get("/");
-		//post.contentType(MediaType.APPLICATION_JSON);
-		//post.content(JsonMappingUtils.asJsonString(customerDto));
-		MvcResult mvcResult = mockMvc.perform(getReq).
+	public void testServiceAvailability() throws Exception {
+
+		mockMvc.perform(get("/")).
+				andExpect(status().isOk()).
+				andReturn();
+	}
+
+	@Test
+	public void testHealthCheckEndpoint() throws Exception {
+
+		mockMvc.perform(get("/test")).
 				andExpect(status().isOk()).
 				andReturn();
 	}
 
 	@Test
 	@Ignore //Requires integration testing
-	public void testWebServerInteractionWithMicroService() throws Exception {
+	public void testWebServerInteractionWithAccountsService() throws Exception {
 
 		this.mockMvc.perform(get("/test-sd"))
+		//this.mockMvc.perform(get("/accounts/123456789"))
 				.andExpect(status().isOk());
 		//.andExpect(jsonPath("number", equalTo("123456789")));
 

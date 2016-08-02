@@ -5,21 +5,25 @@ server:
 # Configure this Discovery Server
 eureka:
   instance:
-    hostname: localhost
+    hostname: ${vcap.application.uris[0]:localhost}
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION default 30s
 #    securePortEnabled: true
 #    statusPageUrl: https://${eureka.hostname}/info
 #    healthCheckUrl: https://${eureka.hostname}/health
 #    homePageUrl: https://${eureka.hostname}/
-#(Note that ${eureka.hostname} is a native placeholder only available in later versions of Eureka. You could achieve the same thing with Spring placeholders as well, e.g. using ${eureka.instance.hostName}.)
-#    nonSecurePort: 80
-
+#(Note that ${eureka.hostname} is a native placeholder only available in later versions of Eureka.
+#You could achieve the same thing with Spring placeholders as well, e.g. using ${eureka.instance.hostName}.)
+    nonSecurePort: 80
+#    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
 #    metadataMap:
 #          instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
   client:  # Not a client, don't register with yourself
     registerWithEureka: false
     fetchRegistry: false
-#    serviceUrl:
-#       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    serviceUrl:
+       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   server:
     waitTimeInMsWhenSyncEmpty: 0 #Start servre quiqly NOT ON PRODUCTION
 

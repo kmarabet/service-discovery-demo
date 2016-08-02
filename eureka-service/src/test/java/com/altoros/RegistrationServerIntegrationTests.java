@@ -1,4 +1,4 @@
-package com.altoros.micro;
+package com.altoros;
 
 import com.altoros.RegistrationServerApp;
 import org.junit.Before;

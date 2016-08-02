@@ -2,14 +2,14 @@
 #memory: 1G
 #instances: 1
 applications:
-- name: micro-service
+- name: micro-service-eureka
   memory: 512M
   instances: 1
 #  host: micro-service-${random-word}
-  path: target/micro-service-1.0-SNAPSHOT-exec.jar
+  path: target/micro-service-1.0-SNAPSHOT-eureka-exec.jar
   #no-route: true
   env:
-#    SPRING_PROFILES_DEFAULT: cloud  #BY DEFAULT
+#    SPRING_PROFILES_DEFAULT: cloud  #BY DEFAULT ON CF
     DEBUG: "true"
     debug: "true"
   services:

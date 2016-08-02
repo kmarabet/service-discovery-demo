@@ -26,6 +26,7 @@
 		<module>eureka-service</module>
 		<module>micro-service</module>
 		<module>client-service</module>
+		<module>microservice-cloud-commons</module>
 	</modules>
 
 	<parent>
@@ -57,22 +58,28 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
+				<profile-id>eureka</profile-id>
 				<consul.enable>false</consul.enable>
 				<eureka.enable>true</eureka.enable>
+			<web.server.name>web-service</web.server.name>
+				<micro.serice.name>accounts-service</micro.serice.name>
 			</properties>
 			<dependencies>
 				<!-- Eureka service registration -->
 				<dependency>
 					<groupId>org.springframework.cloud</groupId>
-					<artifactId>spring-cloud-starter-eureka-server</artifactId>
+					<artifactId>spring-cloud-starter-eureka</artifactId>
 				</dependency>
 			</dependencies>
 		</profile>
 		<profile>
 			<id>consul</id>
 			<properties>
+				<profile-id>consul</profile-id>
 				<consul.enable>true</consul.enable>
 				<eureka.enable>false</eureka.enable>
+			<web.server.name>web-service-consul</web.server.name>
+				<micro.serice.name>micro-service-consul</micro.serice.name>
 			</properties>
 			<dependencies>
 				<!-- Consul service registration -->

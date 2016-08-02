@@ -1,4 +1,4 @@
-# HTTP Server
+#Could be also declared in the @WebIntegrationTest({"server.port=0", "spring.cloud.discovery.enabled=false"})
 server:
 #  port: 2222   # HTTP (Tomcat) port
   port: 0

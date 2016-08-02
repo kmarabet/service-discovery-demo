@@ -7,7 +7,7 @@
 <body>
 	<h1>Message from the discovered (via service-discovery) micro-service:</h1>
 
-	<dd th:text="${message}">number</dd>
+	<dd th:text="${textModel.message}">number</dd>
 
 	<div th:replace="footer :: copy"></div>
 </body>

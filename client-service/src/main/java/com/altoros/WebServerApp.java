@@ -2,13 +2,14 @@ package com.altoros;
 
 import com.altoros.web.WebMicroController;
 import com.altoros.web.WebMicroService;
-import com.altoros.web.HomeController;
+import com.altoros.HomeController;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
@@ -21,8 +22,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 @EnableDiscoveryClient
 // Disable component scanner in order to instantiate
-// the annotated @Controller WebMicroController and @Service WebMicroService manually...
+// the annotated @Controller WebAccountsController and @Service WebAccountsService manually...
 @ComponentScan(useDefaultFilters = false)
+//@PropertySource(value = { "application.properties","web-server.properties" })
+//@Import(CommonConfig.class)
 public class WebServerApp {
 
 	/**
@@ -35,15 +38,12 @@ public class WebServerApp {
 
 	/**
 	 * Run the application using Spring Boot and an embedded servlet engine.
-	 * 
-	 * @param args
-	 *            Program arguments - ignored.
+	 * @param args Program arguments - ignored.
 	 */
 	public static void main(String[] args) {
 		// Tell server to look for web-server.properties or web-server.yml
 		//System.setProperty("spring.config.name", "web-server");
-		//MICRO_SERVICE_URL = System.getProperty("micro.service.url");
-		//System.err.println("MICRO_SERVICE_URL: "+MICRO_SERVICE_URL);
+
 		SpringApplication.run(WebServerApp.class, args);
 	}
 
@@ -54,7 +54,7 @@ public class WebServerApp {
 	}
 
 	/**
-	 * The WebMicroService encapsulates the interaction with the micro-service.
+	 * The AccountService encapsulates the interaction with the micro-service.
 	 * 
 	 * @return A new service instance.
 	 */
@@ -77,6 +77,13 @@ public class WebServerApp {
 	@Bean
 	public HomeController homeController() {
 		return new HomeController();
+	}
+
+	@Bean
+	public ApplicationInfo applicationInfo(){
+		ApplicationInfo appInfo = new ApplicationInfo();
+		appInfo.setArtifactId("Web-server-1.0-SNAPSHOT");
+		return appInfo;
 	}
 
 }

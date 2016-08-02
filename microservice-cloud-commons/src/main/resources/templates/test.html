@@ -1,0 +1,7 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+The application spring.application.name is: <text th:text="${appInfo.appName}"/>, running on
+<text th:if="!${appInfo.cloudProfileSet}">port: <span th:text="${appInfo.port}"/> </text>
+<text th:if="${appInfo.cloudProfileSet}">the cloud under the name: <span th:text="${appInfo.cloudAppName}"/> </text>
+</html>

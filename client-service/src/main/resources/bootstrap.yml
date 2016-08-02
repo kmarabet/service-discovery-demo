@@ -2,11 +2,10 @@
 #so they cannot be overridden by local configuration, by default.
 spring:
   application:
-    name: web-service  # Identify this application
+    name: @web.server.name@  # Identify this application
 #  cloud:
 #      config:
 #        uri: ${SPRING_CONFIG_URI:http://localhost:8888}
-
 # Discovery Server Access
 #Consul default address: localhost:8500
   cloud:
@@ -15,6 +14,30 @@ spring:
       host: localhost
 #      host: 172.30.0.125
       port: 8500
+      discovery:
+        instanceId: ${instanceId}
+#        preferIpAddress: true
+        healthCheckPath: /test
+#        healthCheckInterval: 15s
+# Eureka Discovery Server Access
+eureka:
+  instance:
+    instanceId: ${instanceId}
+  client:
+    enabled: @eureka.enable@
+#    region: default
+#    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: ${eurekaUri}/eureka/
+#    availabilityZones:
+#      default: ${APPLICATION_DOMAIN:${DOMAIN:defaultZone}}
+
+#ribbon: #Client load balancer embeded in Eureka
+#  ServerListRefreshInterval: 1000
+instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+#instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+consulUri: http://${spring.cloud.consul.host}:${spring.cloud.consul.port}/ui
+eurekaUri: ${vcap.services.eureka-service.credentials.uri:http://localhost:1111}
 
 ---
 spring:
@@ -23,3 +46,17 @@ spring:
       consul:
         host: 192.168.115.130
 #        port: 8500
+      discovery:
+        instanceId: ${instanceId}
+        hostname: ${vcap.application.uris[0]}
+        port: 80
+
+eureka:
+  instance:
+    instanceId: ${instanceId}
+    hostname: ${vcap.application.uris[0]}
+    nonSecurePort: 80
+
+#instanceId: ${spring.application.name}:${vcap.application.instance_id}
+instanceId: ${spring.application.name}:${vcap.application.application_name}:${vcap.application.instance_id}
+consulUri: http://172.30.0.125:${spring.cloud.consul.port}/ui

@@ -4,7 +4,7 @@ eureka:
     hostname: ${vcap.application.uris[0]}
 #    hostname: ${APPLICATION_DOMAIN}
     nonSecurePort: 80
-    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    instanceId: ${spring.application.name}:${vcap.application.instance_id}
 #    metadataMap:
 #      instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
 
